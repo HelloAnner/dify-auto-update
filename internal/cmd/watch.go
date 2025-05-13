@@ -21,20 +21,20 @@ var watchCmd = &cobra.Command{
 		syncer := service.NewDifySyncer(baseURL, apiKey)
 		watcher := service.NewFolderWatcher(folder, syncer)
 
-		fmt.Printf("Starting to watch folder: %s\n", folder)
-		fmt.Printf("Using Dify base URL: %s\n", baseURL)
+		fmt.Printf("开始监听文件夹: %s\n", folder)
+		fmt.Printf("使用Dify基础URL: %s\n", baseURL)
 
 		ticker := time.NewTicker(5 * time.Second)
 		defer ticker.Stop()
 
 		// Initial sync
 		if err := watcher.SyncFolder(); err != nil {
-			fmt.Printf("Error during initial sync: %v\n", err)
+			fmt.Printf("初始化同步失败: %v\n", err)
 		}
 
 		for range ticker.C {
 			if err := watcher.SyncFolder(); err != nil {
-				fmt.Printf("Error during sync: %v\n", err)
+				fmt.Printf("同步失败: %v\n", err)
 			}
 		}
 	},

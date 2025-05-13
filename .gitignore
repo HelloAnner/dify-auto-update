@@ -1,0 +1,14 @@
+dify-auto-update/
+
+dist/
+
+sync/
+
+.DS_Store
+
+.idea/
+
+.vscode/
+
+.venv/
+
