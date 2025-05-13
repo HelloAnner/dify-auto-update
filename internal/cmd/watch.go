@@ -24,7 +24,7 @@ var watchCmd = &cobra.Command{
 		fmt.Printf("Starting to watch folder: %s\n", folder)
 		fmt.Printf("Using Dify base URL: %s\n", baseURL)
 
-		ticker := time.NewTicker(5 * time.Minute)
+		ticker := time.NewTicker(5 * time.Second)
 		defer ticker.Stop()
 
 		// Initial sync
