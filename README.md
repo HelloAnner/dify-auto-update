@@ -16,17 +16,7 @@
 # 构建镜像
 docker build -t dify-auto-update .
 
-# 创建 Docker 卷（如果还没创建）
-docker volume create sync
-
 # 运行容器
-docker run -d --name dify-auto-update \
-  -e DIFY_API_KEY={api key} \
-  -e DIFY_BASE_URL=http://192.168.101.236:48060 \
-  -v sync:/app/watch \
-  dify-auto-update 
-
-# 如果要使用本地目录而不是 Docker 卷，可以这样运行：
 docker run -d --name dify-auto-update \
   -e DIFY_API_KEY={api key} \
   -e DIFY_BASE_URL=http://192.168.101.236:48060 \

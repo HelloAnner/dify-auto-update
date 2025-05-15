@@ -1,0 +1,16 @@
+# Dify API 配置
+dify:
+  api_key: "dataset-GnBgMXj5jJVDROiiA7qSn3dr"
+  base_url: "http://192.168.101.236:48060"
+  retry_attempts: 3
+  retry_delay: 5  # 秒
+
+# 监控配置
+watch:
+  folder: "sync"  # 容器内路径
+  interval: 5  # 同步间隔（秒）
+
+# 日志配置
+log:
+  level: "info"  # debug, info, warn, error
+  format: "text" # text, json 

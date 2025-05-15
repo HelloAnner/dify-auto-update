@@ -33,7 +33,7 @@ func NewFolderWatcher(folder string, syncer *DifySyncer) *FolderWatcher {
 
 // SyncFolder 同步文件夹内容到Dify
 func (w *FolderWatcher) SyncFolder() error {
-	// 获取所有
+	// 获取所有数据集
 	datasets, err := w.syncer.GetDatasets()
 	if err != nil {
 		return fmt.Errorf("获取数据集失败：%v", err)

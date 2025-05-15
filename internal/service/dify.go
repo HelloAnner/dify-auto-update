@@ -29,10 +29,10 @@ type Document struct {
 
 // DatasetsResponse 数据集响应结构体
 type DatasetsResponse struct {
-	Data []Dataset `json:"data"`
-	Total int `json:"total"`
-	Page int `json:"page"`
-	Limit int `json:"limit"`
+	Data  []Dataset `json:"data"`
+	Total int       `json:"total"`
+	Page  int       `json:"page"`
+	Limit int       `json:"limit"`
 }
 
 // DocumentsResponse 文档响应结构体
@@ -77,7 +77,7 @@ func (d *DifySyncer) CreateDataset(name string) (string, error) {
 func (d *DifySyncer) CreateDocument(datasetID, name, text string) (string, error) {
 	payload := map[string]interface{}{
 		"name":               name,
-		"text":              text,
+		"text":               text,
 		"indexing_technique": "high_quality",
 		"process_rule": map[string]string{
 			"mode": "automatic",
@@ -140,7 +140,6 @@ func (d *DifySyncer) GetDatasets() ([]Dataset, error) {
 
 		allDatasets = append(allDatasets, result.Data...)
 
-		// 如果当前页的数据量小于每页限制，说明已经是最后一页
 		if len(result.Data) < limit || result.Total <= len(allDatasets) {
 			break
 		}
@@ -207,4 +206,4 @@ func (d *DifySyncer) makeRequest(method, path string, payload interface{}) (*htt
 	}
 
 	return resp, nil
-} 
+}

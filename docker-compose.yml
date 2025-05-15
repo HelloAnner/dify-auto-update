@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  dify-auto-update:
+    image: alpine:3.19
+    container_name: dify-auto-update
+    volumes:
+      - ./dify-auto-update:/app/dify-auto-update
+      - ./config.yaml:/app/config.yaml
+      - ${WATCH_DIR:-./watch}:/data/watch
+    working_dir: /app
+    command: ./dify-auto-update
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3" 
