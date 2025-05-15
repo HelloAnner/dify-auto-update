@@ -7,8 +7,8 @@ dify:
 
 # 监控配置
 watch:
-  folder: "sync"  # 容器内路径
-  interval: 5  # 同步间隔（秒）
+  folder: "watch"  # 容器内路径
+  interval: 50  # 同步间隔（秒）
 
 # 日志配置
 log:

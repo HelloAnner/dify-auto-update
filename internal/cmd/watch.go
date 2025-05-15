@@ -59,8 +59,7 @@ func startWatcher() error {
 	defer fsWatcher.Close()
 
 	// 启动定时同步
-	go func() {
-		ticker := time.NewTicker(interval)
+	ticker := time.NewTicker(interval)
 		defer ticker.Stop()
 
 		// 初始同步
@@ -74,43 +73,8 @@ func startWatcher() error {
 			select {
 			case <-ticker.C:
 				if err := watcher.SyncFolder(); err != nil {
-					log.Printf("Error syncing folder: %v", err)
-				} else {
-					log.Printf("Periodic sync completed successfully")
-				}
+				log.Printf("Error syncing folder: %v", err)
 			}
-		}
-	}()
-
-	// 添加监控目录
-	if err := fsWatcher.Add(watchFolder); err != nil {
-		return fmt.Errorf("error adding folder to watcher: %w", err)
-	}
-
-	log.Printf("Started watching folder: %s", watchFolder)
-	log.Printf("Using Dify base URL: %s", viper.GetString("dify.base_url"))
-	log.Printf("Sync interval: %v", interval)
-
-	// 处理文件系统事件
-	for {
-		select {
-		case event, ok := <-fsWatcher.Events:
-			if !ok {
-				return nil
-			}
-			if event.Op&(fsnotify.Write|fsnotify.Create|fsnotify.Remove) != 0 {
-				log.Printf("File event detected: %s", event.String())
-				if err := watcher.SyncFolder(); err != nil {
-					log.Printf("Error syncing folder after file event: %v", err)
-				} else {
-					log.Printf("Event-triggered sync completed successfully")
-				}
-			}
-		case err, ok := <-fsWatcher.Errors:
-			if !ok {
-				return nil
-			}
-			log.Printf("Watcher error: %v", err)
 		}
 	}
 }

@@ -21,6 +21,7 @@ PLATFORMS=darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -rf $(BINARY_NAME)
 
 # Create build directory
 .PHONY: init
@@ -46,23 +47,23 @@ build-all: clean init
 # Build for specific platforms
 .PHONY: build-darwin-amd64
 build-darwin-amd64: init
-	GOOS=darwin GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)_darwin_amd64 $(MAIN_PATH)
+	GOOS=darwin GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BINARY_NAME) $(MAIN_PATH)
 
 .PHONY: build-darwin-arm64
 build-darwin-arm64: init
-	GOOS=darwin GOARCH=arm64 $(GO) build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)_darwin_arm64 $(MAIN_PATH)
+	GOOS=darwin GOARCH=arm64 $(GO) build $(LDFLAGS) -o $(BINARY_NAME) $(MAIN_PATH)
 
 .PHONY: build-linux-amd64
 build-linux-amd64: init
-	GOOS=linux GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)_linux_amd64 $(MAIN_PATH)
+	GOOS=linux GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BINARY_NAME) $(MAIN_PATH)
 
 .PHONY: build-linux-arm64
 build-linux-arm64: init
-	GOOS=linux GOARCH=arm64 $(GO) build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)_linux_arm64 $(MAIN_PATH)
+	GOOS=linux GOARCH=arm64 $(GO) build $(LDFLAGS) -o $(BINARY_NAME) $(MAIN_PATH)
 
 .PHONY: build-windows-amd64
 build-windows-amd64: init
-	GOOS=windows GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)_windows_amd64.exe $(MAIN_PATH)
+	GOOS=windows GOARCH=amd64 $(GO) build $(LDFLAGS) -o $(BINARY_NAME).exe $(MAIN_PATH)
 
 # Run tests
 .PHONY: test

@@ -19,6 +19,6 @@ Thumbs.db
 
 dist/
 
-sync/
+watch/
 
 .venv/

@@ -88,10 +88,8 @@ func (w *FolderWatcher) SyncFolder() error {
 		return err
 	}
 
-	// 检查已删除的文件
 	for filePath, doc := range w.fileDocuments {
 		if !currentFiles[filePath] {
-			// 文件不再存在，从Dify中删除
 			if err := w.syncer.DeleteDocument(doc.datasetID, doc.documentID); err != nil {
 				return fmt.Errorf("删除文件 %s 对应的文档失败：%v", filePath, err)
 			}

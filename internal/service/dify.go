@@ -202,7 +202,7 @@ func (d *DifySyncer) makeRequest(method, path string, payload interface{}) (*htt
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		defer resp.Body.Close()
 		bodyBytes, _ := io.ReadAll(resp.Body)
-		return nil, fmt.Errorf("API请求失败，状态码：%d，错误信息：%s", resp.StatusCode, string(bodyBytes))
+		return nil, fmt.Errorf("API请求失败， url: %s, 状态码：%d，错误信息：%s", d.baseURL+path, resp.StatusCode, string(bodyBytes))
 	}
 
 	return resp, nil
